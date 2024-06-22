@@ -98,6 +98,6 @@ To implement and test this code, follow these steps:
     - Open `index.html` in a web browser.
 5. **Test the application:**
     - Click on the voting buttons to cast votes.
-    - Observe the vote count updating in real-time on the client-side.
+    - Observe the vote count updating in real-time on the client-side on mutiple browsers.
 
 **Note:** This implementation assumes a local Redis server running on `localhost:6379`. You may need to adjust the Redis connection settings depending on your environment.
