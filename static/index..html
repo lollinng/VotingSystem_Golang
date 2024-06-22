@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Voting System</title>
+</head>
+<body>
+  <h1>Vote for Your Favorite Option</h1>
+  <button onclick="vote('Option A')">Option A</button>
+  <button onclick="vote('Option B')">Option B</button>
+  <button onclick="vote('Option C')">Option C</button>
+
+  <h2>Results</h2>
+  <ul id="results"></ul>
+
+  <script>
+    const results = document.getElementById('results');
+    const ws = new WebSocket('ws://localhost:8040/ws');
+
+    ws.onopen = function(event) {
+      console.log('WebSocket connection established.');
+    };
+
+    ws.onmessage = function(event) {
+      console.log('message')
+      const voteCount = JSON.parse(event.data);
+      updateResults(voteCount.option, voteCount.count);
+    };
+    
+    ws.onclose = function(event) {
+      console.log('WebSocket connection closed. Code:', event.code, 'Reason:', event.reason);
+    };
+
+    ws.onerror = function(event) {
+      console.error('WebSocket error observed:', event);
+    };
+
+    function vote(option) {
+      if (ws.readyState === WebSocket.OPEN) {
+        ws.send(JSON.stringify({ option: option }));
+      } else {
+        console.error('WebSocket is not open.');
+      }
+    }
+
+    function updateResults(option, count) {
+      console.log('called',option,count)
+      let li = document.getElementById(option);
+      console.log('udpate',option,count)
+      if (!li) {
+        li = document.createElement('li');
+        li.id = option;
+        results.appendChild(li);
+      }
+      li.textContent = `${option}: ${count}`;
+    }
+
+  </script>
+</body>
+</html>
