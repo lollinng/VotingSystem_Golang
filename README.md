@@ -8,8 +8,7 @@ This project implements a real-time voting system using Go, Redis, and WebSocket
 
 The code is organized into the following directories and files:
 
-```lua
-luaCopy code
+```
 govoting (root directory)
 |-- models (directory)
 |   |-- vote.go
