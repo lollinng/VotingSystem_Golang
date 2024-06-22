@@ -12,7 +12,8 @@ The code is organized into the following directories and files:
 luaCopy code
 govoting (root directory)
 |-- models (directory)
-|   |-- models.go
+|   |-- vote.go
+|   |-- vote_count.go
 |
 |-- redis_db (directory)
 |   |-- redis_db.go
@@ -23,7 +24,10 @@ govoting (root directory)
 |   |-- increment_vote_count.go
 |   |-- upgrader.go
 |
-|-- index.html
+|-- static (directory)
+|   |-- index.html
+|
+|-- main.go
 
 ```
 
