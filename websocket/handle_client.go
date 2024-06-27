@@ -16,6 +16,8 @@ func handleClient(conn *websocket.Conn) {
 		conn.Close()
 	}()
 
+	var voted = false
+
 	for {
 		var vote models.Vote
 		err := conn.ReadJSON(&vote)
@@ -26,11 +28,16 @@ func handleClient(conn *websocket.Conn) {
 			break
 		}
 
-		// Update vote count in Redis
-		err = incrementVoteCount(vote.Option)
-		if err != nil {
-			log.Println("Error incrementing vote count in Redis:", err)
-			break
+		if voted == false {
+			// Update vote count in Redis
+			err = incrementVoteCount(vote.Option, conn)
+			if err != nil {
+				log.Println("Error incrementing vote count in Redis:", err)
+				break
+			}
+			voted = true
+		} else {
+			log.Println("User has already voted, ignoring subsequent vote")
 		}
 
 		// Broadcast updated vote count to all clients

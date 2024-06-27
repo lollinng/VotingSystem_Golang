@@ -11,12 +11,8 @@ func WsHandler(w http.ResponseWriter, r *http.Request) {
 		log.Println(err)
 		return
 	}
-	defer func() {
-		delete(clients, conn)
-		conn.Close()
-	}()
 
 	clients[conn] = true
 
-	handleClient(conn)
+	go handleClient(conn)
 }
