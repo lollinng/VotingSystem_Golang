@@ -101,3 +101,9 @@ To implement and test this code, follow these steps:
     - Observe the vote count updating in real-time on the client-side on mutiple browsers.
 
 **Note:** This implementation assumes a local Redis server running on `localhost:6379`. You may need to adjust the Redis connection settings depending on your environment.
+
+## DEMO
+
+https://github.com/lollinng/VotingSystem_Golang/assets/55660103/c07f1122-0d4f-4e99-ae82-d823a8182057
+
+

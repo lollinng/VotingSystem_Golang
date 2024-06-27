@@ -28,7 +28,7 @@ func handleClient(conn *websocket.Conn) {
 			break
 		}
 
-		if voted == false {
+		if !voted {
 			// Update vote count in Redis
 			err = incrementVoteCount(vote.Option, conn)
 			if err != nil {
